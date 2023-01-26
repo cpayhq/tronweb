@@ -1,6 +1,6 @@
 {
-    "name": "tronweb",
-    "version": "5.0.0",
+    "name": "@cpayhq/tronweb",
+    "version": "5.0.1",
     "description": "JavaScript SDK that encapsulates the TRON HTTP API",
     "main": "dist/TronWeb.node.js",
     "browser": "dist/TronWeb.js",
@@ -16,7 +16,8 @@
         "test-no-accounts": "node scripts/test-node.js && npx mocha 'test/**/*.test.js'",
         "test:browser": "npm run-script newaccount && node scripts/test-browser.js && npx karma start --single-run --browsers ChromeHeadless",
         "coverage": "npm run-script test:browser && npm run-script test",
-        "btest": "npm run build:dev && npm run test"
+        "btest": "npm run build:dev && npm run test",
+        "deploy": "npm run build && npm publish"
     },
     "husky": {
         "hooks": {
@@ -86,7 +87,10 @@
             "url": "https://github.com/tron-us"
         }
     ],
-    "homepage": "https://github.com/tronprotocol/tronweb",
+    "homepage": "https://github.com/cpayhq/tronweb",
     "license": "MIT",
-    "repository": "https://github.com/tronprotocol/tronweb.git"
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:cpayhq/tronweb.git"
+    }
 }
