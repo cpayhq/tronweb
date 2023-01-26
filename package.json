@@ -1,6 +1,6 @@
 {
     "name": "@cpayhq/tronweb",
-    "version": "5.0.1",
+    "version": "5.0.2",
     "description": "JavaScript SDK that encapsulates the TRON HTTP API",
     "main": "dist/TronWeb.node.js",
     "browser": "dist/TronWeb.js",

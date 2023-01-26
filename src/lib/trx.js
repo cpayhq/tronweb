@@ -46,11 +46,11 @@ export default class Trx {
     }
 
     getTransactionInfoByBlockNum(blockID, callback = false) {
-        if (!callback)
-            return this.injectPromise(this.getTransactionInfoByBlockNum);
-
         if (!utils.isInteger(blockID) || blockID < 0)
             return callback('Invalid block number provided');
+
+        if (!callback)
+            return this.injectPromise(this.getTransactionInfoByBlockNum, blockID);
 
         this.tronWeb.fullNode.request('wallet/gettransactioninfobyblocknum', {
             num: parseInt(blockID)
