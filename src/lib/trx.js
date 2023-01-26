@@ -45,6 +45,20 @@ export default class Trx {
         }).catch(err => callback(err));
     }
 
+    getTransactionInfoByBlockNum(blockID, callback = false) {
+        if (!callback)
+            return this.injectPromise(this.getTransactionInfoByBlockNum);
+
+        if (!utils.isInteger(blockID) || blockID < 0)
+            return callback('Invalid block number provided');
+
+        this.tronWeb.fullNode.request('wallet/gettransactioninfobyblocknum', {
+            num: parseInt(blockID)
+        }).then(txs => {
+            callback(null, txs);
+        }).catch(err => callback(err));
+    }
+
     getConfirmedCurrentBlock(callback = false) {
         if (!callback)
             return this.injectPromise(this.getConfirmedCurrentBlock);
@@ -668,7 +682,7 @@ export default class Trx {
     static verifyMessageV2(message, signature) {
         return utils.message.verifyMessage(message, signature);
     }
-    
+
     verifyTypedData(domain, types, value, signature, address = this.tronWeb.defaultAddress.base58, callback = false) {
         if (utils.isFunction(address)) {
             callback = address;
@@ -791,9 +805,9 @@ export default class Trx {
 
     /**
      * sign message v2 for verified header length
-     * 
-     * @param {message to be signed, should be Bytes or string} message 
-     * @param {privateKey for signature} privateKey 
+     *
+     * @param {message to be signed, should be Bytes or string} message
+     * @param {privateKey for signature} privateKey
      * @param {reserved} options
      * @param {callback function} callback
      */
@@ -802,7 +816,7 @@ export default class Trx {
             callback = options;
             options = {};
         }
-        
+
         if (utils.isFunction(privateKey)) {
             callback = privateKey;
             privateKey = this.tronWeb.defaultPrivateKey;
